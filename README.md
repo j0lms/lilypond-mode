@@ -1,18 +1,19 @@
-This repo contains the Emacs `lilypond-mode` files from the upstream vesion of Lilypond.
+This repo contains the Emacs `lilypond-mode` files from the upstream version of LilyPond.
 
-This is meant to be used with elpaca without needing to clone the entire Lilypond repo use python to create `lilypond-words.el`, like so:
+This is meant to be used with elpaca without needing to clone the entire LilyPond repo or use Python to create `lilypond-words.el`, like so:
 
 ```elisp
-(elpaca-use-package
-  (lilypond-mode :type git
-	             :host github
-	             :repo "j0lms/lilypond-mode"
-                 :files ("*.el"))
-  :mode ("\\.ly$" . LilyPond-mode)
-  :commands (LilyPond-mode))
+(use-package lilypond-mode
+  :ensure (lilypond-mode
+	 :type git
+	 :host github
+	 :repo "j0lms/lilypond-mode"
+     :files ("*.el"))
+  :mode ("\\.ly$" . lilypond-mode)
+  :commands (lilypond-mode))
 ```
 
-Additionally, `lilypond-words.el` which is generated from the `/scripts/build/lilypond-words.py` script, was giving a EOF error.
+Additionally, `lilypond-words.el`, which is generated from the `/scripts/build/lilypond-words.py` script, was causing an EOF error.
 
 The original `lilypond-mode.el` attempted to parse the entire `lilypond-words.el` file using the `read` function.
 
